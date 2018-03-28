@@ -35,7 +35,7 @@ module Zenvia
       case response
       when Net::HTTPSuccess, Net::HTTPRedirection, Net::HTTPOK
         response = JSON.parse(response.body)
-        response["receivedResponse"]["receivedMessages"]
+        response["receivedResponse"]["receivedMessages"] || []
       else
         response.body
       end
