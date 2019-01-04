@@ -43,12 +43,12 @@ module Zenvia
 
     def send
       response = send_to_zenvia(@id_sms, @cel_phone, @msg, @schedule_date, @aggregate_id)
-      self.status_code = response["statusCode"].to_i
+      self.status_code = response["statusCode"].to_i if response.is_a?(Hash)
       response
     end
 
     def sent?
-      status_code < 4
+      status_code.present? && status_code < 4
     end
   end
 end
